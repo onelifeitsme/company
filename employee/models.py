@@ -28,7 +28,7 @@ class Employee(AbstractUser):
 
 
     def __str__(self):
-        return self.username
+        return self.last_name
 
     def get_absolute_url(self):
         return reverse('single_employee', args=[str(self.slug)])

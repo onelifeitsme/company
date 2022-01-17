@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'main.apps.MainConfig',
     'employee.apps.EmployeeConfig',
     'department.apps.DepartmentConfig',
     'position.apps.PositionConfig'

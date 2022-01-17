@@ -1,0 +1,39 @@
+{% extends 'main/base.html' %}
+{% block title %}
+<title>Сотрудники</title>
+{% endblock %}
+{% block topic_name %}
+<div id="block_topic_name">
+    <h1>Сотрудники</h1>
+    <div class="create_button_block">
+    <a href="{% url 'create_employee' %}">
+<button class="create" type="button">
+    Добавить нового сотрудника
+</button>
+    </a>
+</div>
+</div>
+{% endblock %}
+{% block maincontent %}
+<div id="header_employees_params">
+    <h2 class="param">ФИО</h2>
+    <h2 class="param">Должность</h2>
+    <h2 class="param">Отдел</h2>
+    <h2 class="param">Дата устройства</h2>
+    <h2 class="param">Срок работы в компании (лет)</h2>
+</div>
+<div id="employees_values_block">
+    {% for employee in employees %}
+    <div id="employee_one_block">
+        {% if employee.photo %}
+        <img class="cart_photo_little" src="{{ employee.photo.url }}"/>
+        {% endif %}
+        <div class="val"><h3><a href="{{ employee.get_absolute_url }}">{{ employee.username }}, {{ employee.last_name }}</a></h3></div>
+        <div class="val"><h3><a href="{{ employee.position.get_absolute_url }}">{{ employee.position }}</a></h3></div>
+        <div class="val"><h3><a href="{{ employee.department.get_absolute_url }}">{{ employee.department }}</a></h3></div>
+        <div class="val"><h3>{{ employee.join_date }}</h3></div>
+        <div class="val"><h3>{{ employee.experience }}</h3></div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

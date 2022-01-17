@@ -1,0 +1,33 @@
+{% extends 'main/base.html' %}
+{% block title %}
+<title>Отделы</title>
+{% endblock %}
+{% block topic_name %}
+<div id="block_topic_name">
+    <h1>Карточка сотрудника {{ employee.last_name }} {{ employee.username }}</h1>
+</div>
+{% endblock %}
+{% block maincontent %}
+<div class="cart_block">
+    <div class="employee_decription">
+        <div class="cart_fio"><h1>Фамилия, Имя: {{ employee.last_name }}, {{ employee.username }}</h1></div>
+        <div class="cart_department"><h1>Подразделение: {{ employee.department }}</h1></div>
+        <div class="cart_position"><h1>Должность: {{ employee.position }}</h1></div>
+        <div class="cart_join_date"><h1>Дата прихода в компанию: {{ employee.join_date }}</h1></div>
+        <div class="cart_time_with_company"><h1>Срок работы в компании: {{ employee.experience }}</h1></div>
+    </div>
+    <div class="employee_photo"></div>
+    {% if employee.photo %}
+    <img class="cart_photo" src="{{ employee.photo.url }}"/>
+    {% endif %}
+    <div class="change_employy_data_button">
+    <a href="{% url 'change_employee_data' slug=employee.slug %}">
+<button class="create" type="button">
+    Редактировать данные
+</button>
+    </a>
+    </div>
+</div>
+
+{% endblock %}
+

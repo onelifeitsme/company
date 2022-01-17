@@ -1,0 +1,34 @@
+{% extends 'main/base.html' %}
+{% block title %}
+<title>Отделы</title>
+{% endblock %}
+{% block topic_name %}
+<div id="block_topic_name">
+    <h1>{{ department.name }}</h1>
+</div>
+{% endblock %}
+{% block maincontent %}
+<div class="employees_on_position_block">
+    <div class="employyes_list">
+        {% for departments_employee in departments_employees %}
+        <a href="{{ departments_employee.get_absolute_url }}">
+        <div class="demps_one_emp_in_list">
+        {% if departments_employee.photo %}
+        <img class="cart_photo_mini" src="{{ departments_employee.photo.url }}"/>
+        {% endif %}
+        <h2>{{ departments_employee.last_name }} -  {{ departments_employee.position }}</h2>
+            </div>
+            </a>
+        {% endfor %}
+        </div>
+    <div class="add_employye_button_block">
+        <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+            <button type="submit">Перевести</button>
+</form>
+    </div>
+</div>
+
+{% endblock %}
+

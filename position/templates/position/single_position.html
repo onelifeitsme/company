@@ -1,0 +1,39 @@
+{% extends 'main/base.html' %}
+{% block title %}
+<title>Отделы</title>
+{% endblock %}
+{% block topic_name %}
+<div id="block_topic_name">
+    <h1>{{ position.name }}</h1>
+    <div class="create_button_block">
+    <a href="{% url 'change_position' slug=position.slug %}">
+<button class="create" type="button">
+    Изменить описание должности
+</button>
+    </a>
+</div>
+</div>
+{% endblock %}
+{% block maincontent %}
+<div class="employees_on_position_block">
+    <div class="employyes_list">
+        {% for position_employee in position_employees %}
+        <a href="{{ position_employee.get_absolute_url }}">
+        <div class="demps_one_emp_in_list">
+        <img class="cart_photo_mini" src="{{ position_employee.photo.url }}"/>
+        <h2>{{ position_employee.last_name }}</h2>
+            </div>
+            </a>
+        {% endfor %}
+        </div>
+    <div class="add_employye_button_block">
+        <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+            <button type="submit">Перевести</button>
+</form>
+    </div>
+</div>
+
+{% endblock %}
+

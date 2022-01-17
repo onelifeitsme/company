@@ -1,0 +1,18 @@
+{% extends 'main/base.html' %}
+{% block title %}
+<title>Новый отдел</title>
+{% endblock %}
+{% block topic_name %}
+<div id="block_topic_name">
+    <h1>Создание нового отдела</h1>
+</div>
+{% endblock %}
+{% block maincontent %}
+<div class="create_data_block">
+    <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Создать</button>
+        </form>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+    <title>Title</title>
+    {% endblock %}
+    <link type='text/css' href="{% static 'main/css/main.css' %}" rel='stylesheet'/>
+</head>
+<body>
+{% block header %}
+<div id="header">
+    <div id="company_name"><h1>Наша компания</h1></div>
+    <div id="login">
+        <h2 id="username">{{ user }}</h2>
+        <a href="{% url 'logout' %}">
+        <button>Выйти</button>
+    </a>
+    </div>
+</div>
+
+<div id="menu">
+    <h2><a href="{% url 'departments' %}">Наши отделы</a></h2>
+    <h2><a href="{% url 'positions' %}">Справочинк должностей</a></h2>
+    <h2><a href="{% url 'employees' %}">Сотрудники</a></h2>
+</div>
+{% endblock %}
+{% block topic_name %}
+<div id="block_topic_name">
+    <h1>Название раздела</h1>
+</div>
+{% endblock %}
+{% block maincontent %}
+Главный контент
+{% endblock %}
+</body>
+</html>

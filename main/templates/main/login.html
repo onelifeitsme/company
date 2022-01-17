@@ -1,0 +1,16 @@
+{% extends 'main/base.html' %}
+{% block title %}
+<title>Войти</title>
+{% endblock %}
+{% block maincontent %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Войти</button>
+        <a href="{% url 'registration' %}">
+<button type="button">
+    Зарегистрироваться
+</button>
+    </a>
+</form>
+{% endblock %}

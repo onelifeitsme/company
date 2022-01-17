@@ -1,0 +1,25 @@
+{% extends 'main/base.html' %}
+{% block title %}
+<title>Должности</title>
+{% endblock %}
+{% block topic_name %}
+<div id="block_topic_name">
+    <h1>Список должностей</h1>
+    <div class="create_button_block">
+    <a href="{% url 'create_position' %}">
+<button class="create" type="button">
+    Добавить новую должность
+</button>
+    </a>
+</div>
+</div>
+{% endblock %}
+{% block maincontent %}
+{% for position in positions %}
+<div class="position_block">
+<h1><a href="{{ position.get_absolute_url }}">{{ position.name }} - {{ position.department }}</a></h1>
+<h3>Обязанности: {{ position.description }}</h3>
+    </div>
+{% endfor %}
+{% endblock %}
+

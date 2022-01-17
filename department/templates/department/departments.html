@@ -1,0 +1,30 @@
+{% extends 'main/base.html' %}
+{% block title %}
+<title>Отделы</title>
+{% endblock %}
+{% block topic_name %}
+<div id="block_topic_name">
+    <div class="topic_name_h1_block"><h1>Наши отделы</h1></div>
+    <div class="create_button_block">
+    <a href="{% url 'create_department' %}">
+<button class="create" type="button">
+    Создать новый отдел
+</button>
+    </a>
+</div>
+
+</div>
+{% endblock %}
+{% block maincontent %}
+<div class="departments_main_block">
+    <div class="list_of_department">
+{% for department in departments %}
+
+<h1 class="department_block"><a href="{{ department.get_absolute_url }}">{{ department.name }}</a></h1>
+
+{% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+
