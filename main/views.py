@@ -1,16 +1,15 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import SignUpForm
-from django.http import HttpResponse, HttpResponseRedirect
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView, LogoutView
-from django.shortcuts import render
-from django.views.generic import FormView, ListView, DetailView, UpdateView, CreateView
-from django import forms
+from django.views.generic import FormView, TemplateView
 
 
 
-def Home(reuqst):
+class HomepageView(LoginRequiredMixin, TemplateView):
     # ПРЕДСТАВЛЕНИЕ ГЛАВНОЙ СТРАНИЦЫ
-    return render(reuqst, 'main/index.html')
+    template_name = 'main/index.html'
+    login_url = 'login'
 
 
 

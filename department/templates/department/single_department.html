@@ -8,26 +8,46 @@
 </div>
 {% endblock %}
 {% block maincontent %}
+<div class="create_button_block">
+    <a href="{% url 'create_position' %}">
+<button class="create" type="button">
+    Добавить должность в отдел
+</button>
+    </a>
+</div>
 <div class="employees_on_position_block">
-    <div class="employyes_list">
+
+        <div class="employyes_list">
+        <h1>Сотрудники отдела:</h1>
         {% for departments_employee in departments_employees %}
         <a href="{{ departments_employee.get_absolute_url }}">
         <div class="demps_one_emp_in_list">
         {% if departments_employee.photo %}
         <img class="cart_photo_mini" src="{{ departments_employee.photo.url }}"/>
         {% endif %}
-        <h2>{{ departments_employee.last_name }} -  {{ departments_employee.position }}</h2>
+        <h2>{{ departments_employee.last_name }} {{ departments_employee.first_name }} - {{ departments_employee.position }}</h2>
             </div>
             </a>
         {% endfor %}
         </div>
-    <div class="add_employye_button_block">
-        <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-            <button type="submit">Перевести</button>
-</form>
+
+    <div class="list_of_positions_in_sigle_dep">
+        <h1>Свободные должности в отделе:</h1>
+        {% for department_position in department_positions %}
+        {% if department_position.vacant %}
+        <a href="{{ department_position.get_absolute_url }}">
+        <div class="demps_one_emp_in_list">
+        <h2>{{ department_position.name }}</h2>
+
+            </div>
+        </a>
+        {% endif %}
+        {% endfor %}
     </div>
+
+
+
+
 </div>
 
 {% endblock %}

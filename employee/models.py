@@ -2,18 +2,16 @@ from department.models import Department
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from position.models import Position
-# Create your models here.
 from django.urls import reverse
 from pytils.translit import slugify
-from multiselectfield import MultiSelectField
-from autoslug import AutoSlugField
 from datetime import date
 from dateutil.relativedelta import relativedelta
 
+
 # Create your models here.
 class Employee(AbstractUser):
-    position = models.ForeignKey(Position, on_delete=models.CASCADE)
-    department = models.ForeignKey(Department, on_delete=models.CASCADE)
+    position = models.ForeignKey(Position, on_delete=models.CASCADE, verbose_name='Должность', null=True)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, verbose_name='Отдел', null=True)
     join_date = models.DateField('Дата устройства', auto_now_add=True)
     last_name = models.CharField('Фамилия', max_length=250)
     patronymic = models.CharField('Отчество', max_length=250)
@@ -28,7 +26,10 @@ class Employee(AbstractUser):
 
 
     def __str__(self):
-        return self.last_name
+        if self.last_name:
+            return self.last_name
+        else:
+            return self.username
 
     def get_absolute_url(self):
         return reverse('single_employee', args=[str(self.slug)])

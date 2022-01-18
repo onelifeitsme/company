@@ -13,8 +13,9 @@ from dateutil.relativedelta import relativedelta
 
 class Position(models.Model):
     name = models.CharField('Название', max_length=120)
-    description = models.TextField('Обязанности', max_length=500)
-    department = models.ForeignKey(Department, on_delete=models.CASCADE)
+    description = models.TextField('Обязанности', max_length=500, blank=True)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, verbose_name='Отдел')
+    vacant = models.BooleanField('Свободная должность', default=True)
     slug = models.SlugField(auto_created=True)
 
 

@@ -13,14 +13,20 @@
 <div id="header">
     <div id="company_name"><h1>Наша компания</h1></div>
     <div id="login">
-        <h2 id="username">{{ user }}</h2>
+        <h2 id="username">{{ user.last_name }} {{ user_first_name }}
+            {% if user.username %}
+            ({{ user.username }})</h2>
+            {% endif %}
         <a href="{% url 'logout' %}">
+        {% if user.is_authenticated %}
         <button>Выйти</button>
+        {% endif %}
     </a>
     </div>
 </div>
 
 <div id="menu">
+    <h2><a href="{% url 'home' %}">Главная</a></h2>
     <h2><a href="{% url 'departments' %}">Наши отделы</a></h2>
     <h2><a href="{% url 'positions' %}">Справочинк должностей</a></h2>
     <h2><a href="{% url 'employees' %}">Сотрудники</a></h2>

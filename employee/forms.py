@@ -1,10 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-from django import forms
 from django.forms import ModelForm
-from multiselectfield import MultiSelectField
-
-from .models import Employee, Department, Position
+from .models import Employee, Position
 
 
 
@@ -15,11 +11,11 @@ class ChangeEmployeeDataForm(ModelForm):
 
 
 
-class EmployeeCreateForm(ModelForm):
+class EmployeeCreateForm(UserCreationForm):
     class Meta:
         model = Employee
-        fields = ('first_name', 'last_name', 'patronymic', 'department', 'position', 'photo')
-        labels = {'department': 'Отдел', 'position': 'Должность', 'photo': 'Фото'}
+        fields = ('username', 'first_name', 'last_name', 'patronymic', 'department', 'position', 'photo', 'is_staff')
+        labels = {'username': 'Логин для входа', 'department': 'Отдел', 'position': 'Должность', 'photo': 'Фото', 'is_staff': 'Сделать администратором'}
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -30,6 +26,6 @@ class EmployeeCreateForm(ModelForm):
                 department_id = int(self.data.get('department'))
                 self.fields['position'].queryset = Position.objects.filter(department_id=department_id).order_by('name')
             except (ValueError, TypeError):
-                pass  # invalid input from the client; ignore and fallback to empty City queryset
+                pass
         elif self.instance.pk:
             self.fields['position'].queryset = self.instance.department.position_set.order_by('name')

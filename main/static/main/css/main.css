@@ -1,5 +1,3 @@
-
-
 body {
     background: rgba(255,211,204,0.51);
 }
@@ -11,7 +9,9 @@ body {
   padding: 15px;
 }
 
-
+.list_of_positions_in_sigle_dep {
+    display: inline-block;
+}
 
 
 #company_name {
@@ -63,6 +63,8 @@ body {
 
 .val {
     width: 20%;
+    display: flex;
+    justify-content: center;
 }
 
 #create_employee {
@@ -81,7 +83,8 @@ body {
 
 .employees_on_position_block {
     display: flex;
-    padding-left: 40%;
+    padding-left: 10%;
+    padding-right: 10%;
     justify-content: space-between;
 }
 
@@ -104,10 +107,13 @@ body {
     width: 50px;
     height: 50px;
     padding-left: 3px;
-    padding-right: 5%;
 }
 
 
+.img_block_little {
+    width: 50px;
+    height: 50px;
+}
 
 
 .cart_photo_mini {
@@ -152,10 +158,29 @@ body {
     left: 90%;
 }
 
+.button_add_pos {
+    padding-top: 5%;
+    padding-left: 10%;
+}
+
+.button_dep_create {
+    padding-left: 100%;
+}
+
+.create_data_block {
+    display: flex;
+    padding-left: 10%;
+
+}
+
+.position_desc {
+    padding: 1%;
+}
+
 .cart_block {
     display: flex;
     width: 40%;
-    height: 400px;
+    height: 600px;
     border-style: solid;
     justify-content: center;
 }
@@ -172,4 +197,9 @@ body {
 .home_main_block {
     display: flex;
     justify-content: center;
+}
+
+
+a {
+    text-decoration: none;
 }

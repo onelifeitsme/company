@@ -8,11 +8,37 @@
 </div>
 {% endblock %}
 {% block maincontent %}
-<div class="create_data_block">
-    <form action="" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Создать</button>
+
+<div class="create_data_block" id="parent">
+    <form action="" method="POST" enctype="multipart/form-data" id="create_dep_form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <p class="elem">
+        <label for="id_position">Должность:</label>
+        <input type="text" name="position" maxlength="300" required id="id_position">
+        </p>
+        <button type="button" onclick="testjs()">Добавить должность</button>
+        <div class="button_dep_create">
+        <button  class="button_dep_create" type="submit">Создать отдел</button>
+        </div>
         </form>
+
 </div>
+
+
+
+
+<script>
+    
+    function testjs() {
+        let parent = document.getElementById('create_dep_form');
+        let elem = parent.querySelector('.elem');
+        let clone = elem.cloneNode(true);
+        parent.appendChild(clone);
+    }
+    
+</script>
+
+
+
 {% endblock %}

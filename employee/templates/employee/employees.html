@@ -25,10 +25,12 @@
 <div id="employees_values_block">
     {% for employee in employees %}
     <div id="employee_one_block">
+        <div class="img_block_little">
         {% if employee.photo %}
         <img class="cart_photo_little" src="{{ employee.photo.url }}"/>
         {% endif %}
-        <div class="val"><h3><a href="{{ employee.get_absolute_url }}">{{ employee.username }}, {{ employee.last_name }}</a></h3></div>
+        </div>
+        <div class="val"><h3><a href="{{ employee.get_absolute_url }}">{{ employee.last_name }}, {{ employee.first_name }}, {{ employee.patronymic }}</a></h3></div>
         <div class="val"><h3><a href="{{ employee.position.get_absolute_url }}">{{ employee.position }}</a></h3></div>
         <div class="val"><h3><a href="{{ employee.department.get_absolute_url }}">{{ employee.department }}</a></h3></div>
         <div class="val"><h3>{{ employee.join_date }}</h3></div>
