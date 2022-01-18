@@ -31,8 +31,16 @@
         {% endif %}
         </div>
         <div class="val"><h3><a href="{{ employee.get_absolute_url }}">{{ employee.last_name }}, {{ employee.first_name }}, {{ employee.patronymic }}</a></h3></div>
+        {% if employee.position %}
         <div class="val"><h3><a href="{{ employee.position.get_absolute_url }}">{{ employee.position }}</a></h3></div>
+        {% else %}
+        <div class="val"><h3>Должность не определена</h3></div>
+        {% endif %}
+        {% if employee.department %}
         <div class="val"><h3><a href="{{ employee.department.get_absolute_url }}">{{ employee.department }}</a></h3></div>
+        {% else %}
+        <div class="val"><h3>Отдел не определён</h3></div>
+        {% endif %}
         <div class="val"><h3>{{ employee.join_date }}</h3></div>
         <div class="val"><h3>{{ employee.experience }}</h3></div>
     </div>
