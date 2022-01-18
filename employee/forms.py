@@ -4,13 +4,6 @@ from .models import Employee, Position
 
 
 
-class ChangeEmployeeDataForm(ModelForm):
-    class Meta:
-        model = Employee
-        fields = ('username', 'last_name', 'department', 'position', 'photo')
-
-
-
 class EmployeeCreateForm(UserCreationForm):
     class Meta:
         model = Employee
@@ -29,3 +22,10 @@ class EmployeeCreateForm(UserCreationForm):
                 pass
         elif self.instance.pk:
             self.fields['position'].queryset = self.instance.department.position_set.order_by('name')
+
+
+
+class ChangeEmployeeDataForm(ModelForm):
+    class Meta:
+        model = Employee
+        fields = ('username', 'last_name', 'department', 'position', 'photo')

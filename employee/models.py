@@ -10,8 +10,8 @@ from dateutil.relativedelta import relativedelta
 
 # Create your models here.
 class Employee(AbstractUser):
-    position = models.ForeignKey(Position, on_delete=models.CASCADE, verbose_name='Должность', null=True)
-    department = models.ForeignKey(Department, on_delete=models.CASCADE, verbose_name='Отдел', null=True)
+    position = models.ForeignKey(Position, on_delete=models.CASCADE, verbose_name='Должность', null=True, blank=True)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, verbose_name='Отдел', null=True, blank=True)
     join_date = models.DateField('Дата устройства', auto_now_add=True)
     last_name = models.CharField('Фамилия', max_length=250)
     patronymic = models.CharField('Отчество', max_length=250)
