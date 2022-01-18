@@ -6,7 +6,7 @@ from .models import Position
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import render
-from django.views.generic import FormView, ListView, DetailView, UpdateView, CreateView
+from django.views.generic import FormView, ListView, DetailView, UpdateView, CreateView, DeleteView
 from django import forms
 
 
@@ -28,6 +28,15 @@ class PositionChangeView(LoginRequiredMixin, UpdateView):
     template_name = 'position/create_position.html'
     template_name_suffix = '_update_form'
     login_url = 'login'
+
+
+
+class PositionDeleteView(DeleteView):
+    # ПРЕДСТАВЛЕНИЕ УДАЛЕНИЯ ДОЛЖНОСТИ
+    model = Position
+    template_name = 'main/delete_object.html'
+    template_name_suffix = '_confirm_delete'
+    success_url = '/positions'
 
 
 
@@ -68,6 +77,8 @@ class SinglePositionView(LoginRequiredMixin, DetailView):
             emp.position = position
             emp.department = position.department
             emp.save()
+            position.vacant = False
+            position.save()
             return HttpResponseRedirect(self.request.path_info)
 
 

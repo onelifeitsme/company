@@ -2,8 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import ChangeEmployeeDataForm, EmployeeCreateForm
 from .models import Employee, Position
 from django.shortcuts import render
-from django.views.generic import FormView, ListView, DetailView, UpdateView, CreateView
-
+from django.views.generic import FormView, ListView, DetailView, UpdateView, CreateView, DeleteView
 
 
 class EmployeeCreateView(LoginRequiredMixin, CreateView):
@@ -32,6 +31,16 @@ class ChangeEmployeeDataView(LoginRequiredMixin, UpdateView):
     template_name = 'employee/change_employee_data.html'
     context_object_name = 'employee'
     login_url = 'login'
+
+
+
+class EmployeeDeleteView(DeleteView):
+    # ПРЕДСТАВЛЕНИЕ УДАЛЕНИЯ СОТРУДНИКА
+    model = Employee
+    template_name = 'main/delete_object.html'
+    template_name_suffix = '_confirm_delete'
+    success_url = '/employees'
+
 
 
 

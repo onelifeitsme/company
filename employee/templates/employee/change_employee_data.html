@@ -15,6 +15,11 @@
         Сохранить изменения
     </button>
 </form>
+<div class="delete_button">
+<a href="{% url 'delete_employee' slug=employee.slug %}">
+        <button>Удалить сотрудника</button>
+</a>
+    </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>

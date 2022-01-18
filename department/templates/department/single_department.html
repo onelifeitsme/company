@@ -44,11 +44,12 @@
         {% endif %}
         {% endfor %}
     </div>
-
-
-
-
 </div>
+<div class="delete_button">
+<a href="{% url 'delete_department' slug=department.slug %}">
+        <button>Удалить отдел</button>
+</a>
+    </div>
 
 {% endblock %}
 

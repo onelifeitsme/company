@@ -1,0 +1,17 @@
+{% extends 'main/base.html' %}
+{% block title %}
+<title>Компания</title>
+{% endblock %}
+{% block topic_name %}
+<div id="block_topic_name">
+    <h1>Подтвердите удаление</h1>
+</div>
+{% endblock %}
+{% block maincontent %}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>Вы уверены, что хотите удалить "{{ object }}"?</p>
+    {{ form }}
+    <button type="submit">Подтвердить</button>
+</form>
+{% endblock %}

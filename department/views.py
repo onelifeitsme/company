@@ -4,7 +4,7 @@ from .forms import CreateDepartmentForm
 from django.http import HttpResponseRedirect
 from employee.models import Employee
 from .models import Department
-from django.views.generic import FormView, ListView, DetailView
+from django.views.generic import FormView, ListView, DetailView, DeleteView
 from django import forms
 
 
@@ -29,6 +29,16 @@ class DepartmentCreateView(LoginRequiredMixin, FormView):
                     vacant = True
                 )
         return HttpResponseRedirect('departments')
+
+
+
+class DepartmentDeleteView(DeleteView):
+    # ППРЕДСТАВЛЕНИЕ УДАЛЕНИЯ ОТДЕЛА
+    model = Department
+    template_name = 'main/delete_object.html'
+    template_name_suffix = '_confirm_delete'
+    success_url = '/departments'
+
 
 
 class DepartmentsView(LoginRequiredMixin, ListView):

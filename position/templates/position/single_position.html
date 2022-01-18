@@ -39,6 +39,10 @@
 </form>
     </div>
 </div>
-
+<div class="delete_button">
+<a href="{% url 'delete_position' slug=position.slug %}">
+        <button>Удалить должность</button>
+</a>
+    </div>
 {% endblock %}
 

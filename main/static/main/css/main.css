@@ -13,6 +13,9 @@ body {
     display: inline-block;
 }
 
+.delete_button {
+    margin-top: 2%;
+}
 
 #company_name {
     padding-left: 44%;
