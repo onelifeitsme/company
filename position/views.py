@@ -1,14 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from employee.models import Employee
 from .models import Position
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth.views import LoginView, LogoutView
-from django.shortcuts import render
-from django.views.generic import FormView, ListView, DetailView, UpdateView, CreateView, DeleteView
+from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 from django import forms
-
 
 
 class PositionCreateView(LoginRequiredMixin, CreateView):
@@ -20,7 +15,6 @@ class PositionCreateView(LoginRequiredMixin, CreateView):
     login_url = 'login'
 
 
-
 class PositionChangeView(LoginRequiredMixin, UpdateView):
     # ПРЕДСТАВЛЕНИЕ РЕДАКТИРОВАНИЯ ДОЛЖНОСТИ
     model = Position
@@ -28,7 +22,6 @@ class PositionChangeView(LoginRequiredMixin, UpdateView):
     template_name = 'position/create_position.html'
     template_name_suffix = '_update_form'
     login_url = 'login'
-
 
 
 class PositionDeleteView(DeleteView):
@@ -39,14 +32,12 @@ class PositionDeleteView(DeleteView):
     success_url = '/positions'
 
 
-
 class PositionsView(LoginRequiredMixin, ListView):
     # ПРЕДСТАВЛЕНИЕ СПИСКА ДОЛЖНОСТЕЙ
     context_object_name = 'positions'
     queryset = Position.objects.order_by('department')
     template_name = 'position/positions.html'
     login_url = 'login'
-
 
 
 class SinglePositionView(LoginRequiredMixin, DetailView):
@@ -63,9 +54,10 @@ class SinglePositionView(LoginRequiredMixin, DetailView):
         # СОЗДАЁТСЯ ФОРМА С ПОЛЯМИ ВЫБОРА СОТРУДИКОВ, ИСКЛЮЧАЯ ТЕХ, КТО УЖЕ В ЭТОМ ОТДЕЛЕ
         emps = Employee.objects.exclude(position=self.get_object())
         emp_choices = [(emp, emp.last_name) for emp in emps]
+
         class ChoiseForma(forms.Form):
             transfer_employee_choise = forms.ChoiceField(choices=emp_choices,
-            label='Перевести сотрудника на эту должность')
+                                                         label='Перевести сотрудника на эту должность')
         context['form'] = ChoiseForma
         return context
 
@@ -80,10 +72,3 @@ class SinglePositionView(LoginRequiredMixin, DetailView):
             position.vacant = False
             position.save()
             return HttpResponseRedirect(self.request.path_info)
-
-
-
-
-
-
-

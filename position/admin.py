@@ -10,6 +10,3 @@ class PositionAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Position, PositionAdmin)
-
-
-

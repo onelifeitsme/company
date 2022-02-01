@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import *
+from .views import DepartmentsView, DepartmentCreateView, SingleDepartmentView, DepartmentDeleteView
 
 urlpatterns = [
     path('departments', DepartmentsView.as_view(), name='departments'),

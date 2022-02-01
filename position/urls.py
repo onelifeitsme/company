@@ -1,8 +1,5 @@
 from django.urls import path
-# from .views import RegistrationUserView, LoginUserView, Logout, Home, DepartmentsView, PositionsView, EmployeesView, \
-#     SingleEmployeeView, DepartmentCreateView, SingleDepartmentView, SinglePositionView
-
-from .views import *
+from .views import PositionCreateView, PositionChangeView, PositionDeleteView, PositionsView, SinglePositionView
 
 urlpatterns = [
     path('create_position', PositionCreateView.as_view(), name='create_position'),

@@ -8,8 +8,8 @@ from datetime import date
 from dateutil.relativedelta import relativedelta
 
 
-# Create your models here.
 class Employee(AbstractUser):
+    """Модель сотрудника"""
     position = models.ForeignKey(Position, on_delete=models.CASCADE, verbose_name='Должность', null=True, blank=True)
     department = models.ForeignKey(Department, on_delete=models.CASCADE, verbose_name='Отдел', null=True, blank=True)
     join_date = models.DateField('Дата устройства', auto_now_add=True)
@@ -18,12 +18,10 @@ class Employee(AbstractUser):
     slug = models.SlugField(unique=True)
     photo = models.ImageField(upload_to='images/%Y/%m/%d/', blank=True)
 
-
     def experience(self):
-        # ПОДСЧЁТ КОЛИЧЕСТВА ЛЕТ ПРЕБЫВАНИЯ В КОМПАНИИ
+        """Подсчёт количества пребывания лет в компании"""
         delta = relativedelta(date.today() - self.join_date)
         return delta.years
-
 
     def __str__(self):
         if self.last_name:
@@ -34,13 +32,11 @@ class Employee(AbstractUser):
     def get_absolute_url(self):
         return reverse('single_employee', args=[str(self.slug)])
 
-
     def save(self, *args, **kwargs):
+        """Автоматическое добавление слага при создании объекта модели"""
         self.slug = slugify([self.username, self.last_name])
         super(Employee, self).save(*args, **kwargs)
-
 
     class Meta:
         verbose_name = 'Сотрудник'
         verbose_name_plural = 'Сотрудники'
-#

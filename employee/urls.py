@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import *
+from .views import EmployeeCreateView, load_positions, ChangeEmployeeDataView, EmployeeDeleteView, EmployeesView, \
+    SingleEmployeeView
 
 urlpatterns = [
     path('add_employee', EmployeeCreateView.as_view(), name='create_employee'),
@@ -9,4 +10,3 @@ urlpatterns = [
     path('employees', EmployeesView.as_view(), name='employees'),
     path('emp/<slug>', SingleEmployeeView.as_view(), name='single_employee'),
 ]
-

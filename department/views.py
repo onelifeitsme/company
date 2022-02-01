@@ -8,7 +8,6 @@ from django.views.generic import FormView, ListView, DetailView, DeleteView
 from django import forms
 
 
-
 class DepartmentCreateView(LoginRequiredMixin, FormView):
     # ПРЕДСТАВЛЕНИЕ СОЗДАНИЯ ОТДЕЛА
     form_class = CreateDepartmentForm
@@ -24,12 +23,11 @@ class DepartmentCreateView(LoginRequiredMixin, FormView):
             new_department = Department.objects.get(name=depatment_name)
             for position in positions:
                 Position.objects.create(
-                    name = position,
-                    department = new_department,
-                    vacant = True
+                    name=position,
+                    department=new_department,
+                    vacant=True
                 )
         return HttpResponseRedirect('departments')
-
 
 
 class DepartmentDeleteView(DeleteView):
@@ -40,14 +38,12 @@ class DepartmentDeleteView(DeleteView):
     success_url = '/departments'
 
 
-
 class DepartmentsView(LoginRequiredMixin, ListView):
     # ПРЕДСТАВЛЕНИЕ СПИСКА ОТДЕЛОВ
     context_object_name = 'departments'
     queryset = Department.objects.all()
     template_name = 'department/departments.html'
     login_url = 'login'
-
 
 
 class SingleDepartmentView(LoginRequiredMixin, DetailView):
@@ -65,22 +61,10 @@ class SingleDepartmentView(LoginRequiredMixin, DetailView):
         # СОЗДАЁТСЯ ФОРМА С ПОЛЯМИ ВЫБОРА СОТРУДИКОВ, ИСКЛЮЧАЯ ТЕХ, КТО УЖЕ В ЭТОМ ОТДЕЛЕ
         emps = Employee.objects.exclude(department=self.get_object())
         emp_choices = [(emp, emp) for emp in emps]
+
         class ChoiseForma(forms.Form):
-            transfer_employee_choise = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=emp_choices, label='Перевести сотрудника в этот отдел')
+            transfer_employee_choise = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,
+                                                                 choices=emp_choices,
+                                                                 label='Перевести сотрудника в этот отдел')
         context['form'] = ChoiseForma
         return context
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

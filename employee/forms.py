@@ -3,12 +3,13 @@ from django.forms import ModelForm
 from .models import Employee, Position
 
 
-
 class EmployeeCreateForm(UserCreationForm):
     class Meta:
         model = Employee
-        fields = ('username', 'first_name', 'last_name', 'patronymic', 'department', 'position', 'photo', 'is_staff')
-        labels = {'username': 'Логин для входа', 'department': 'Отдел', 'position': 'Должность', 'photo': 'Фото', 'is_staff': 'Сделать администратором'}
+        fields = ('username', 'first_name', 'last_name', 'patronymic',
+                  'department', 'position', 'photo', 'is_staff')
+        labels = {'username': 'Логин для входа', 'department': 'Отдел', 'position': 'Должность',
+                  'photo': 'Фото', 'is_staff': 'Сделать администратором'}
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -22,7 +23,6 @@ class EmployeeCreateForm(UserCreationForm):
                 pass
         elif self.instance.pk:
             self.fields['position'].queryset = self.instance.department.position_set.order_by('name')
-
 
 
 class ChangeEmployeeDataForm(ModelForm):
